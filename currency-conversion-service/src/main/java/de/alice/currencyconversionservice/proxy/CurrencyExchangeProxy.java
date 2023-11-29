@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 /**
  * Proxy for the currency-exchange microservice
  */
-@FeignClient(name = "currency-exchange", url = "localhost:8000")
+//@FeignClient(name = "currency-exchange", url = "localhost:8000") // with hardcoded url
+@FeignClient(name = "currency-exchange") // with service discovery
 public interface CurrencyExchangeProxy {
 
     @GetMapping("/currency-exchange/from/{from}/to/{to}")
