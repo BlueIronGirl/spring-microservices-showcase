@@ -27,3 +27,6 @@ Java Spring Boot Microservices 5-in-1 - Spring Boot, Spring Cloud, Docker, Kuber
 - http://localhost:8765/currency-exchange/from/USD/to/INR
 - http://localhost:8765/currency-conversion-feign/from/USD/to/INR/quantity/10
 - http://localhost:8765/currency-conversion-new/from/USD/to/INR/quantity/10
+
+## Zipkin
+- http://localhost:9411/zipkin
