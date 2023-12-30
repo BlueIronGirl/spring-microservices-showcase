@@ -17,16 +17,22 @@ The properties can be found in the same folder as the README file.
 ## Currency Exchange Service
 The Currency-Exchange-Service is a microservice to get currency-exchange-objects from a database. 
 It also shows how to implement a rest-controller with the fault tolerance api "resilience4j". 
-Options for telemetry are also implemented.
+Options for telemetry are also implemented. 
+### Local-URLs:
 - http://localhost:8000/currency-exchange/from/USD/to/INR
-- http://localhost:8000/currency-exchange-feign/from/USD/to/INR
+### Kubernetes-URLs:
+- http://34.34.139.203:8000/currency-exchange/from/USD/to/INR
 
 ## Currency Conversion Service
 The Currency-Exchange-Service is a microservice to get currency-exchange-objects from the currency-exchange-service.
 This is implemented in 2 ways: with rest-template and with open-feign. 
 Options for telemetry are also implemented.
+### Local-URLs:
 - http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10
 - http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/10
+### Kubernetes-URLs:
+- http://34.38.6.215:8100/currency-conversion/from/USD/to/INR/quantity/10
+- http://34.38.6.215:8100/currency-conversion-feign/from/USD/to/INR/quantity/10
 
 ## Naming-Server (Eureka)
 The Eureka-Naming-Server gives the other microservices the option to register as a client with a service-name.
@@ -42,3 +48,16 @@ The Api-Gateway gives an general entry-point of the application. For that routes
 
 ## Zipkin
 - http://localhost:9411/zipkin
+
+### Kubernetes Commands
+Create Deployments:
+``` shell
+kubectl create deployment currency-conversion --image=blueirongirl/currency-conversion-service-kubernetes:0.0.1-SNAPSHOT
+kubectl create deployment currency-exchange --image=blueirongirl/currency-exchange-service-kubernetes:0.0.1-SNAPSHOT
+```
+
+Expose Deployments:
+``` shell
+kubectl expose deployment currency-conversion --type=LoadBalancer --port=8100
+kubectl expose deployment currency-exchange --type=LoadBalancer --port=8000
+```
