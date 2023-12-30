@@ -66,9 +66,11 @@ Creating Declarative Configuration Kubernetes YAML for Microservices (in each ro
 ```shell
 kubectl get deployment currency-exchange -o yaml >> deployment.yaml
 kubectl get service currency-exchange -o yaml >> service.yaml ### extract all and put into deployment.yaml after "---" as divider
+kubectl delete all -l app=currency-exchange ### deletes pods, deployment and service
 kubectl apply -f deployment.yaml ### apply the local deployment.yaml
 
 kubectl get deployment currency-conversion -o yaml >> deployment.yaml
 kubectl get service currency-conversion -o yaml >> service.yaml ### extract all and put into deployment.yaml after "---" as divider
+kubectl delete all -l app=currency-conversion ### deletes pods, deployment and service
 kubectl apply -f deployment.yaml ### apply the local deployment.yaml
 ```
