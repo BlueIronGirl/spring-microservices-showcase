@@ -26,6 +26,16 @@ spec:
       - image: blueirongirl/currency-conversion-service-kubernetes:0.0.2-SNAPSHOT
         imagePullPolicy: IfNotPresent
         name: currency-conversion-service-kubernetes
+        readinessProbe:
+          httpGet:
+            port: 8100
+            path: /actuator/health/readiness
+          initialDelaySeconds: 150
+        livenessProbe:
+          httpGet:
+            port: 8100
+            path: /actuator/health/liveness
+          initialDelaySeconds: 150
         envFrom:
           - configMapRef:
               name: currency-conversion
@@ -53,7 +63,7 @@ spec:
 ---
 apiVersion: v1
 data:
-  CURRENCY_EXCHANGE_URI: http://currency-exchange
+  CURRENCY_EXCHANGE_URI: "http://currency-exchange"
 kind: ConfigMap
 metadata:
   name: currency-conversion

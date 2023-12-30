@@ -26,6 +26,16 @@ spec:
       - image: blueirongirl/currency-exchange-service-kubernetes:0.0.2-SNAPSHOT
         imagePullPolicy: IfNotPresent
         name: currency-exchange-service-kubernetes
+        readinessProbe:
+          httpGet:
+            port: 8000
+            path: /actuator/health/readiness
+          initialDelaySeconds: 150
+        livenessProbe:
+          httpGet:
+            port: 8000
+            path: /actuator/health/liveness
+          initialDelaySeconds: 150
       restartPolicy: Always
 ---
 apiVersion: v1
