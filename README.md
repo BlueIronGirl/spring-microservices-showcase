@@ -24,7 +24,7 @@ Options for telemetry are also implemented.
 - http://34.34.139.203:8000/currency-exchange/from/USD/to/INR
 
 ## Currency Conversion Service
-The Currency-Exchange-Service is a microservice to get currency-exchange-objects from the currency-exchange-service.
+The Currency-Exchange-Service is a microservice to get currency-exchange-objects from the currency-exchange-service and calculate the result of the currency conversion.
 This is implemented in 2 ways: with rest-template and with open-feign. 
 Options for telemetry are also implemented.
 ### Local-URLs:
@@ -49,20 +49,31 @@ The Api-Gateway gives an general entry-point of the application. For that routes
 ## Zipkin
 - http://localhost:9411/zipkin
 
-### Kubernetes Commands
+## Docker Commands
+Build Docker Image with Maven (in the pom.xml in the plugin-section at the spring-boot-maven-plugin has to be set a image-name and a pullPolicy): 
+```shell
+mvn spring-boot:build-image -DskipTests
+```
+Upload Docker Image to Dockerhub:
+```shell 
+docker push blueirongirl/currency-exchange-service-kubernetes:0.0.2-SNAPSHOT
+docker push blueirongirl/currency-conversion-service-kubernetes:0.0.2-SNAPSHOT
+```
+
+## Kubernetes Commands
 Create Deployments:
-``` shell
-kubectl create deployment currency-conversion --image=blueirongirl/currency-conversion-service-kubernetes:0.0.1-SNAPSHOT
+```shell
 kubectl create deployment currency-exchange --image=blueirongirl/currency-exchange-service-kubernetes:0.0.1-SNAPSHOT
+kubectl create deployment currency-conversion --image=blueirongirl/currency-conversion-service-kubernetes:0.0.1-SNAPSHOT
 ```
 
 Expose Deployments:
-``` shell
-kubectl expose deployment currency-conversion --type=LoadBalancer --port=8100
+```shell
 kubectl expose deployment currency-exchange --type=LoadBalancer --port=8000
+kubectl expose deployment currency-conversion --type=LoadBalancer --port=8100
 ```
 
-Creating Declarative Configuration Kubernetes YAML for Microservices (in each root of module-folder)
+Creating Declarative Configuration Kubernetes YAML for Microservices (in each root of module-folder):
 ```shell
 kubectl get deployment currency-exchange -o yaml >> deployment.yaml
 kubectl get service currency-exchange -o yaml >> service.yaml ### extract all and put into deployment.yaml after "---" as divider
