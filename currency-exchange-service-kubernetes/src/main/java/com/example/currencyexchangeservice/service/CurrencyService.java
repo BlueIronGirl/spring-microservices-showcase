@@ -22,7 +22,7 @@ public class CurrencyService {
 
         String serverPort = environment.getProperty("local.server.port");
         String host = environment.getProperty("HOSTNAME");
-        String version = "v1";
+        String version = "v2";
         currencyExchange.setEnvironment(serverPort + " " + version + " " + host);
 
         return currencyExchange;

@@ -8,7 +8,7 @@ metadata:
   name: currency-exchange
   namespace: default
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: currency-exchange
@@ -23,7 +23,7 @@ spec:
         app: currency-exchange
     spec:
       containers:
-      - image: blueirongirl/currency-exchange-service-kubernetes:0.0.1-SNAPSHOT
+      - image: blueirongirl/currency-exchange-service-kubernetes:0.0.2-SNAPSHOT
         imagePullPolicy: IfNotPresent
         name: currency-exchange-service-kubernetes
       restartPolicy: Always
