@@ -31,8 +31,8 @@ Options for telemetry are also implemented.
 - http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10
 - http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/10
 ### Kubernetes-URLs:
-- http://34.38.6.215:8100/currency-conversion/from/USD/to/INR/quantity/10
-- http://34.38.6.215:8100/currency-conversion-feign/from/USD/to/INR/quantity/10
+- http://104.155.95.150:8100/currency-conversion/from/USD/to/INR/quantity/10
+- http://104.155.95.150:8100/currency-conversion-feign/from/USD/to/INR/quantity/10
 
 ## Naming-Server (Eureka)
 The Eureka-Naming-Server gives the other microservices the option to register as a client with a service-name.
