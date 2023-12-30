@@ -26,9 +26,9 @@ spec:
       - image: blueirongirl/currency-conversion-service-kubernetes:0.0.2-SNAPSHOT
         imagePullPolicy: IfNotPresent
         name: currency-conversion-service-kubernetes
-        env:
-          - name: CURRENCY_EXCHANGE_URI
-            value: http://currency-exchange
+        envFrom:
+          - configMapRef:
+              name: currency-conversion
       restartPolicy: Always
 ---
 apiVersion: v1
@@ -50,3 +50,11 @@ spec:
     app: currency-conversion
   sessionAffinity: None
   type: LoadBalancer
+---
+apiVersion: v1
+data:
+  CURRENCY_EXCHANGE_URI: http://currency-exchange
+kind: ConfigMap
+metadata:
+  name: currency-conversion
+  namespace: default

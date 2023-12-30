@@ -85,3 +85,11 @@ kubectl get service currency-conversion -o yaml >> service.yaml ### extract all 
 kubectl delete all -l app=currency-conversion ### deletes pods, deployment and service
 kubectl apply -f deployment.yaml ### apply the local deployment.yaml
 ```
+
+Create Centralized Configuration
+```shell
+kubectl create configmap currency-conversion --from-literal=CURRENCY_EXCHANGE_URI=http://currency-exchange
+kubectl get configmap currency-conversion -o yaml >> configmap.yaml ### extract all and put into deployment.yaml after "---" as divider. Reference it with "envFrom" in the container-section
+kubectl apply -f deployment.yaml ### apply the local deployment.yaml
+```
+
