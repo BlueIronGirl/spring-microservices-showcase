@@ -61,3 +61,14 @@ Expose Deployments:
 kubectl expose deployment currency-conversion --type=LoadBalancer --port=8100
 kubectl expose deployment currency-exchange --type=LoadBalancer --port=8000
 ```
+
+Creating Declarative Configuration Kubernetes YAML for Microservices (in each root of module-folder)
+```shell
+kubectl get deployment currency-exchange -o yaml >> deployment.yaml
+kubectl get service currency-exchange -o yaml >> service.yaml ### extract all and put into deployment.yaml after "---" as divider
+kubectl apply -f deployment.yaml ### apply the local deployment.yaml
+
+kubectl get deployment currency-conversion -o yaml >> deployment.yaml
+kubectl get service currency-conversion -o yaml >> service.yaml ### extract all and put into deployment.yaml after "---" as divider
+kubectl apply -f deployment.yaml ### apply the local deployment.yaml
+```
