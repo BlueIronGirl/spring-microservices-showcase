@@ -93,3 +93,8 @@ kubectl get configmap currency-conversion -o yaml >> configmap.yaml ### extract 
 kubectl apply -f deployment.yaml ### apply the local deployment.yaml
 ```
 
+Setup Autoscaling (1-3 Pods. A new pod is created if the cpu percentage is over 5 percent)
+```shell
+kubectl autoscale deployment currency-exchange --min=1 --max=3 --cpu-percent=5
+kubectl autoscale deployment currency-conversion --min=1 --max=3 --cpu-percent=5
+```
